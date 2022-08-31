@@ -1,0 +1,15 @@
+logging:
+  level:
+    com.wemakeprice.simple: debug
+    org.springframework.r2dbc.core.DefaultDatabaseClient: debug
+    org.springframework.web.reactive.function.client.ExchangeFunctions: DEBUG
+
+spring:
+  r2dbc:
+#    url: r2dbc:pool:mysql://nd-integrated.devdb.wemakeprice.work:3307/wmp_public
+    url: r2dbc:pool:mysql://localhost:3306/test
+    username: root
+    password: kotlin
+
+server:
+  port: 8080
