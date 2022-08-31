@@ -20,44 +20,20 @@ class ApiService(
     private val prodRepository: ProdRepository,
     private val employeeRepository: EmployeeRepository,
 ) {
-    fun getProduct(prodNo: Long): Mono<Prod> =
-        prodRepository.findById(prodNo)
-            .switchIfEmpty { Mono.error(ResponseStatusException(HttpStatus.NOT_FOUND)) }
+    fun getProduct(prodNo: Long): Mono<Prod>
+        // TODO
 
-    fun getEmployee(prodNo: Long): Mono<Employee> =
-        getProduct(prodNo)
-            .flatMap {
-                employeeRepository.findById(it.mdEmpNo)
-            }
+    fun getEmployee(prodNo: Long): Mono<Employee>
+        // TODO
 
-    fun getProducts(dealNo: Long): Flux<Prod> =
-        dealProdRepository.findByDealNo(dealNo)
-            .map { it.prodNo }
-            .collectList()
-            .flatMapMany { prodRepository.findAllById(it) }
+    fun getProducts(dealNo: Long): Flux<Prod>
+        // TODO
 
-    fun getProductsAndEmployee(dealNo: Long): Flux<Pair<Prod, Employee?>> =
-        getProducts(dealNo)
-            .collectList()
-            .flatMap { products: List<Prod> ->
-                val empNos: List<Long> = products.map(Prod::mdEmpNo).distinct()
-                employeeRepository.findAllById(empNos)
-                    .collectList()
-                    .map { mds ->
-                        val mdMap: Map<Long, Employee> = mds.associateBy(Employee::empNo)
+    fun getProductsAndEmployee(dealNo: Long): Flux<Pair<Prod, Employee?>>
+        // TODO
 
-                        products.map { product ->
-                            Pair(product, mdMap[product.mdEmpNo])
-                        }
-                    }
-            }
-            .flatMapIterable { it }
-
-    fun getProducts(page: PageRequest): Mono<PageImpl<Prod>> =
-        prodRepository.findAllByAndMdEmpNoGreaterThan(page)
-            .collectList()
-            .zipWith(prodRepository.countByAndMdEmpNoGreaterThan())
-            .map { PageImpl(it.t1, page, it.t2 ) }
+    fun getProducts(page: PageRequest): Mono<PageImpl<Prod>>
+        // TODO
 }
 
 

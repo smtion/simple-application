@@ -15,11 +15,7 @@ class ApiRouter(
     fun apiRoutes() =
         nest(path("api"),
             router {
-                GET("products/{prodNo}", apiHandler::getProduct)
-                GET("products/{prodNo}/employee", apiHandler::getEmployee)
-                GET("deals/{dealNo}/products", apiHandler::getProducts)
-                GET("deals/{dealNo}/employee", apiHandler::getProductsAndEmployee)
-                GET("products", apiHandler::getPagingProducts)
+                // TODO
             }
         )
 }
